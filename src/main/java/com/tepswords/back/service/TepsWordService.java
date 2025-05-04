@@ -42,5 +42,10 @@ public class TepsWordService {
     public TepsWord getRandomWord() {
         return tepsWordRepository.findRandomWord();
     }
+
+    // seq 범위로 단어 조회
+    public List<TepsWord> getWordsBySeqRange(Integer startSeq, Integer endSeq) {
+        return tepsWordRepository.findBySeqBetweenOrderBySeqAsc(startSeq, endSeq);
+    }
 }
 

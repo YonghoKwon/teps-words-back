@@ -50,5 +50,24 @@ public class TepsWordController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // seq 범위로 단어 조회 (예: 1~20)
+    @GetMapping("/range")
+    public ResponseEntity<List<TepsWord>> getWordsBySeqRange(
+            @RequestParam(defaultValue = "1") Integer startSeq,
+            @RequestParam(defaultValue = "20") Integer endSeq) {
+
+        // 범위 유효성 검사
+        if (startSeq < 1) {
+            startSeq = 1;
+        }
+
+        if (endSeq < startSeq) {
+            endSeq = startSeq;
+        }
+
+        List<TepsWord> words = tepsWordService.getWordsBySeqRange(startSeq, endSeq);
+        return ResponseEntity.ok(words);
+    }
 }
 

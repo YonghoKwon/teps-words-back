@@ -23,5 +23,7 @@ public interface TepsWordRepository extends JpaRepository<TepsWord, TepsWord.Tep
     @Query(value = "SELECT * FROM teps_words ORDER BY RAND() LIMIT 1", nativeQuery = true)
     TepsWord findRandomWord();
 
+    // seq 범위로 검색
+    List<TepsWord> findBySeqBetweenOrderBySeqAsc(Integer startSeq, Integer endSeq);
 }
 
