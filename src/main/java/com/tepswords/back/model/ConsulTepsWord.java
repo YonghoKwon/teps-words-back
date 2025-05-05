@@ -14,13 +14,13 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "teps_words")
-@IdClass(TepsWord.TepsWordId.class)
+@Table(name = "consulteps_words")
+@IdClass(ConsulTepsWord.TepsWordId.class)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TepsWord {
+public class ConsulTepsWord {
 
     @Id
     private Integer seq;

@@ -1,8 +1,8 @@
 package com.tepswords.back.controller;
 
 
-import com.tepswords.back.model.TepsWord;
-import com.tepswords.back.service.TepsWordService;
+import com.tepswords.back.model.ConsulTepsWord;
+import com.tepswords.back.service.ConsulTepsWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,19 +11,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/words")
-public class TepsWordController {
+public class ConsulTepsWordController {
 
-    private final TepsWordService tepsWordService;
+    private final ConsulTepsWordService tepsWordService;
 
     @Autowired
-    public TepsWordController(TepsWordService tepsWordService) {
+    public ConsulTepsWordController(ConsulTepsWordService tepsWordService) {
         this.tepsWordService = tepsWordService;
     }
 
     // 모든 단어 조회
     @GetMapping
-    public ResponseEntity<List<TepsWord>> getAllWords() {
-        List<TepsWord> words = tepsWordService.getAllWords();
+    public ResponseEntity<List<ConsulTepsWord>> getAllWords() {
+        List<ConsulTepsWord> words = tepsWordService.getAllWords();
         return ResponseEntity.ok(words);
     }
 
@@ -42,8 +42,8 @@ public class TepsWordController {
 
     // 랜덤 단어 가져오기
     @GetMapping("/random")
-    public ResponseEntity<TepsWord> getRandomWord() {
-        TepsWord randomWord = tepsWordService.getRandomWord();
+    public ResponseEntity<ConsulTepsWord> getRandomWord() {
+        ConsulTepsWord randomWord = tepsWordService.getRandomWord();
         if (randomWord != null) {
             return ResponseEntity.ok(randomWord);
         } else {
@@ -53,7 +53,7 @@ public class TepsWordController {
 
     // seq 범위로 단어 조회 (예: 1~20)
     @GetMapping("/range")
-    public ResponseEntity<List<TepsWord>> getWordsBySeqRange(
+    public ResponseEntity<List<ConsulTepsWord>> getWordsBySeqRange(
             @RequestParam(defaultValue = "1") Integer startSeq,
             @RequestParam(defaultValue = "20") Integer endSeq) {
 
@@ -66,8 +66,19 @@ public class TepsWordController {
             endSeq = startSeq;
         }
 
-        List<TepsWord> words = tepsWordService.getWordsBySeqRange(startSeq, endSeq);
+        List<ConsulTepsWord> words = tepsWordService.getWordsBySeqRange(startSeq, endSeq);
         return ResponseEntity.ok(words);
+    }
+
+    // ConsulTepsWordController.java에 추가
+    @GetMapping("/random/partOfSpeech/{partOfSpeech}")
+    public ResponseEntity<ConsulTepsWord> getRandomWordByPartOfSpeech(@PathVariable String partOfSpeech) {
+        ConsulTepsWord randomWord = tepsWordService.getRandomWordByPartOfSpeech(partOfSpeech);
+        if (randomWord != null) {
+            return ResponseEntity.ok(randomWord);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
 
