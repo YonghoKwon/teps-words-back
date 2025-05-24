@@ -38,11 +38,6 @@ public class TepsWordService {
         return tepsWordRepository.findByDescriptionContaining(description);
     }
 
-    // des_seq로 검색
-    public List<TepsWord> getWordsByDesSeq(Integer des_seq) {
-        return tepsWordRepository.findByDes_seq(des_seq);
-    }
-
     // seq 범위로 단어 조회
     public List<TepsWord> getWordsBySeqRange(Integer startSeq, Integer endSeq) {
         return tepsWordRepository.findBySeqBetween(startSeq, endSeq);

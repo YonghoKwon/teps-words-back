@@ -49,13 +49,6 @@ public class TepsWordController {
         return ResponseEntity.ok(words);
     }
 
-    // des_seq로 검색
-    @GetMapping("/search/des-seq/{desSeq}")
-    public ResponseEntity<List<TepsWord>> getWordsByDesSeq(@PathVariable Integer desSeq) {
-        List<TepsWord> words = tepsWordService.getWordsByDesSeq(desSeq);
-        return ResponseEntity.ok(words);
-    }
-
     // 랜덤 단어 가져오기
     @GetMapping("/random")
     public ResponseEntity<TepsWord> getRandomWord() {

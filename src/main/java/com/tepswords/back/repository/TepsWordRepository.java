@@ -20,9 +20,6 @@ public interface TepsWordRepository extends JpaRepository<TepsWord, Integer> {
     // seq 범위로 검색
     List<TepsWord> findBySeqBetween(Integer startSeq, Integer endSeq);
 
-    // des_seq로 검색
-    List<TepsWord> findByDes_seq(Integer des_seq);
-
     // 랜덤 단어 가져오기
     @Query(value = "SELECT * FROM teps_words ORDER BY RAND() LIMIT 1", nativeQuery = true)
     Optional<TepsWord> findRandomWord();
