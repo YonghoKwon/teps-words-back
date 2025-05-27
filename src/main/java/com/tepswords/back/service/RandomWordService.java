@@ -20,9 +20,18 @@ public class RandomWordService {
 
     @Transactional(readOnly = true)
     public RandomWordDto getRandomByCategoryId(Integer categoryId) {
-        List<Expression> list = exprRepo.findByCategoryCategoryId(categoryId);
+        List<Expression> list;
+
+        if (categoryId == 0) {
+            // categoryId가 0인 경우 모든 표현 데이터 조회
+            list = exprRepo.findAll();
+        } else {
+            // 특정 카테고리의 표현 데이터 조회
+            list = exprRepo.findByCategoryCategoryId(categoryId);
+        }
+
         if (list.isEmpty()) {
-            throw new IllegalArgumentException("Category " + categoryId + " has no expressions.");
+            throw new IllegalArgumentException("No expressions found.");
         }
 
         // 1) 랜덤 표현
